@@ -2,25 +2,25 @@
 
 ## Scope and Status
 
-This is RADAR’s target conceptual architecture. It does not claim the recommended framework, queues, providers, or integrations exist. Inspect and preserve the existing project stack where practical before implementation.
+RADAR uses a multi-service architecture. Laravel is the application brain and owns orchestration, persistence, Signal intelligence, scheduling, API contracts, and alert decisions. Node.js + Playwright is a constrained browser-extraction worker only. Next.js is presentation only. PostgreSQL is the intelligence system of record and Redis is coordination infrastructure.
 
 ```text
-                    RADAR UI
+                 Next.js RADAR UI
                        │
                        ▼
-                  RADAR API
+                  Laravel API
                        │
           ┌────────────┼────────────┐
           ▼            ▼            ▼
         Redis      PostgreSQL    Realtime
                        │
                        ▼
-               INGESTION ENGINE
+              Laravel INGESTION ENGINE
                        │
         ┌──────────────┼──────────────┐
         ▼              ▼              ▼
-       API          RSS / CAP       HTML
-    ADAPTERS         ADAPTERS       WATCH
+       API          RSS / CAP       HTML / BROWSER
+    ADAPTERS         ADAPTERS       WORKER
         │              │              │
         └──────────────┼──────────────┘
                        ▼
@@ -71,6 +71,18 @@ This is RADAR’s target conceptual architecture. It does not claim the recommen
 9. Avoid duplicate upstream requests.
 10. Keep provider-specific logic outside controllers.
 
+## Implemented Repository Boundaries
+
+```text
+backend/          Laravel 12 application brain
+frontend/         Next.js + TypeScript + MapLibre presentation
+workers/browser/  Node.js + Playwright extraction boundary
+src/Radar/        Preserved deterministic PHP core
+docker/           Optional PostgreSQL, Redis, and browser-worker services
+```
+
+The browser worker returns extracted content and provenance fields. It must not score, deduplicate, cluster, classify Signal priority, or notify users.
+
 ## Recommended Stack
 
 The following is recommended, not verified as the current project stack:
@@ -82,8 +94,7 @@ The following is recommended, not verified as the current project stack:
 | Cache | Redis |
 | Queues | Laravel Queue, Laravel Horizon |
 | Scheduler | Laravel Scheduler |
-| Frontend option A | Next.js + TypeScript + MapLibre |
-| Frontend option B | Laravel + Inertia + Vue 3 + TypeScript + Tailwind |
+| Frontend | Next.js + TypeScript + MapLibre |
 | Browser worker | Node.js + Playwright |
 
 ## Suggested Folder Architecture

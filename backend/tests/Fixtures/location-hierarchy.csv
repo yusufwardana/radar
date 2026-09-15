@@ -1,0 +1,5 @@
+level,code,name,type
+KELURAHAN,01.02.03.0004,Test Kelurahan,KELURAHAN
+DISTRICT,01.02.03,Test District,KECAMATAN
+REGENCY,01.02,Test Regency,KABUPATEN
+PROVINCE,01,Test Province,PROVINSI

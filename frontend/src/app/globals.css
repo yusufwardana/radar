@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root { --bg:#0b0d0f; --panel:#111519; --panel2:#151a1f; --line:#293139; --text:#edf2f1; --muted:#8d9a9d; --accent:#c8f36a; --warning:#ffb86b; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { min-height:100%; background:var(--bg); color:var(--text); }
+body { font-family:Manrope,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:inherit; text-decoration:none; }
+code,small,.eyebrow,.kicker,.live,.priority,.count { font-family:'DM Mono',monospace; }

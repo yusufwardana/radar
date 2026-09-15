@@ -1,0 +1,21 @@
+{
+    "name": "radar/public-intelligence",
+    "description": "RADAR public intelligence and change monitoring foundation",
+    "type": "library",
+    "require": {
+        "php": ">=8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Radar\\": "src/Radar/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Radar\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "php tests/run.php"
+    }
+}
